@@ -1,0 +1,47 @@
+package linkedList;
+
+public class CheckPalidrome {
+
+   static boolean isPalindrome(Node head)
+    {
+        //Your code here
+        Node slow = head;
+        Node fast = head;
+
+        while(fast.next!=null && fast.next.next!=null){
+            slow = slow.next;
+            fast=fast.next.next;
+        }
+        Node temp = head;
+        Node prev = reverse(slow.next);
+        while(prev!= null){
+            if(prev.data!=temp.data){
+                return false;
+            }
+            temp = temp.next;
+            prev = prev.next;
+        }
+
+        return true;
+    }
+
+   static Node reverse(Node node){
+        Node curr = node;
+        Node next;
+        Node prev=null;
+        while(curr!=null){
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
+
+    public static void main(String[] args) {
+        Node head = new Node(10);
+        head.next=new Node(20);
+        head.next.next=new Node(30);
+        isPalindrome(head);
+    }
+}
